@@ -38,4 +38,15 @@ public class CharHP : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    public bool HealHP(float healAmount)
+    {
+        if (currentHP < 100)
+        {
+            currentHP += healAmount;
+            HPImage.fillAmount = currentHP / 100;
+            return true;
+        }
+        else return false;
+    }
 }

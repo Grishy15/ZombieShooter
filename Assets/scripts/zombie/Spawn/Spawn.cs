@@ -5,7 +5,8 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public GameObject prefabZ;
-    private List <Transform> Points = new List <Transform>();
+    private List <Transform> points = new List <Transform>();
+    private List <ZombieHP> enemies = new List <ZombieHP>();
     private Vector3 pos;
     private Quaternion rotate;
     private int index = 0;
@@ -13,24 +14,46 @@ public class Spawn : MonoBehaviour
 
     void Awake()
     {
-        Points.AddRange(GetComponentsInChildren<Transform>());
+        points.AddRange(GetComponentsInChildren<Transform>());
     }
     void Start()
     {
-        SetPoints();
+        SetRandomPoints();
+        Spawning();
     }
     public void Spawning()
     {
-        GameObject newZ = Instantiate(prefabZ, pos, rotate);
-    }
-    void SetPoints()
-    {
-        for(int i = 0; i < zCount; i ++)
+        for (int i = 0; i < zCount; i++)
         {
-            index = Random.Range(0,Points.Count);
-            pos = Points[index].position;
-            rotate = Points[index].rotation;
-            Spawning();
+            GameObject newZ = Instantiate(prefabZ, pos, rotate);
+            SetRandomPoints();
+            ZombieHP newZombie = newZ.GetComponent<ZombieHP>();
+            enemies.Add(newZombie);
         }
+    }
+    void SetRandomPoints()
+    {
+        index = Random.Range(0, points.Count);
+        pos = points[index].position;
+        rotate = points[index].rotation;
+    }
+
+    void RespawnEnemy()
+    {
+        foreach(ZombieHP enemy in enemies)
+        {
+            if(enemy.isDead)
+            {
+                enemy.ResetZombie();
+                SetRandomPoints();
+                enemy.transform.position = pos;
+            }
+        }
+    }
+
+    public IEnumerator WaitTimeForRespawn()
+    {
+        yield return new WaitForSeconds(Random.Range(3f,5f));
+        RespawnEnemy();
     }
 }

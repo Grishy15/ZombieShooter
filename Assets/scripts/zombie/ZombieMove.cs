@@ -107,15 +107,15 @@ public class ZombieMove : MonoBehaviour
     {
         if(isActive)
         {
-            rbZ.isKinematic = true;
-            rbColl.enabled = false;
-            enabled = false;
-        }
-        else
-        {
             rbZ.isKinematic = false;
             rbColl.enabled = true;
             enabled = true;
+        }
+        else
+        {
+            rbZ.isKinematic = true;
+            rbColl.enabled = false;
+            enabled = false;
         }
     }
 

@@ -21,8 +21,8 @@ public class ZombieAnim : MonoBehaviour
         animZ.SetBool("IsAttack", isAttacking);
     }
 
-    public void DeadAnim()
+    public void DeadAnim(bool isDead)
     {
-        animZ.SetTrigger("DeadTrigger");
+        animZ.SetBool("IsDead", isDead);
     }
 }
