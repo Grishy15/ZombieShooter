@@ -5,18 +5,24 @@ using UnityEngine.UI;
 
 public class CharHP : MonoBehaviour
 {
-    private Image HPImage;
+    private Image HPGreen;
+    private Image HPRed;
+
     private float currentHP = 100;
+    private float damageAmount = 0;
 
     void Awake()
     {
-        HPImage = GetComponentInChildren<Image>();
+        HPGreen = transform.GetChild(0).GetComponent<Image>();
+        HPRed = transform.GetChild(1).GetComponent<Image>();
     }
 
     void OnEnable()
     {
         currentHP = 100;
-        HPImage.fillAmount = currentHP / 100;
+        damageAmount = 0;
+        HPGreen.fillAmount = currentHP / 100;
+        HPRed.fillAmount = damageAmount;
         Time.timeScale = 1;
     }
 
@@ -30,7 +36,9 @@ public class CharHP : MonoBehaviour
         if(0 < currentHP)
         {
             currentHP -= damage;
-            HPImage.fillAmount = currentHP / 100;
+            damageAmount += damage;
+            HPGreen.fillAmount = currentHP / 100;
+            HPRed.fillAmount = damageAmount / 100;
         }
         else
         {
@@ -44,7 +52,9 @@ public class CharHP : MonoBehaviour
         if (currentHP < 100)
         {
             currentHP += healAmount;
-            HPImage.fillAmount = currentHP / 100;
+            damageAmount -= healAmount;
+            HPGreen.fillAmount = currentHP / 100;
+            HPRed.fillAmount = damageAmount / 100;
             return true;
         }
         else return false;

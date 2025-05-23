@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1992488313594109368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6479844749119807829}
   - component: {fileID: 6479844749119807826}
   - component: {fileID: 6479844749119807827}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ImageHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 6479844749762823443}
   - component: {fileID: 6479844749762823442}
   - component: {fileID: 6479844749762823445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zombie1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -367,3 +367,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b430d2bab2943cc8273dc8f6dc7b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
+  isActive: 0

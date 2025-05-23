@@ -8,7 +8,7 @@ public class Sounds : MonoBehaviour
     public AudioClip clip;
 
     float time;
-    float interval;
+    float interval = 0.3f;
 
     private void Awake()
     {

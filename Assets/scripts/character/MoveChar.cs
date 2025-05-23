@@ -8,12 +8,14 @@ public class MoveChar : MonoBehaviour
     private Rigidbody2D rbChar;
     private Transform trChar;
     public Transform startPoint;
-    public PivotWeaponRotate wTurn;
+    private PivotWeaponRotate wTurn;
+
     public float speedMove = 8;
     public float jumpForce = 8;
     public float slideSpeed = 20;
     private float inputX;
     private float timer;
+
     private bool isTerra = false;
     private bool isSlide = false;
 

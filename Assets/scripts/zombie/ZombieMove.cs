@@ -125,7 +125,6 @@ public class ZombieMove : MonoBehaviour
         if(hit.collider != null)
         {
             trZ.Translate(Vector3.up * moveUp * Time.deltaTime);
-            Debug.Log("PhysicsRaycast");
         }
     }
 }

@@ -18,10 +18,8 @@ public class ZombieAttack : MonoBehaviour
     {
         if(coll.gameObject.tag == "Player")
         {
-            Debug.Log("CollisionState");
             if(Time.time > nextTimer)
             {
-                Debug.Log("DamageTaken");
                 charHP.TakeDamage(damage);
                 nextTimer = Time.time + intervalTimer;
             }
