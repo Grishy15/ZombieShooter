@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 
 public class ZombieHP : MonoBehaviour
 {
+    public event Action OnIdleSound; 
+    public event Action OnDeadSound; 
+    public event Action OnDamagedSound; 
     private Image HPImage;
     private Transform transZ;
 
@@ -33,6 +37,12 @@ public class ZombieHP : MonoBehaviour
     void OnEnable()
     {
         ResetZombie();
+        OnIdleSound?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        OnDeadSound?.Invoke();
     }
 
     public void TakeDamage(float damage)
@@ -41,6 +51,7 @@ public class ZombieHP : MonoBehaviour
         {
             currentHP -= damage;
             HPImage.fillAmount = currentHP / 100;
+            OnDamagedSound?.Invoke();
         }
         else
         {
@@ -56,10 +67,12 @@ public class ZombieHP : MonoBehaviour
         currentHP = 100;
         HPImage.fillAmount = currentHP / 100;
         zMove.IsInactiveZombie(true);
+        OnIdleSound?.Invoke();
     }
 
     private void DeadActive()
     {
+       OnDeadSound?.Invoke();
         isDead = true;
         anim.DeadAnim(isDead);
         killCount.SetCountKill(1);

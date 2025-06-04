@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
 {
     public Transform startPoint;
     private BulletUI bulletUI;
+    private FireMeshRenderer fireMesh;
+    private DamageEffectZ dmgEffectZ;
     [SerializeField]public LayerMask layerRayCastFire;
 
     private int bulletAmount;
@@ -16,6 +18,12 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         bulletUI = FindObjectOfType<BulletUI>();
+        fireMesh = GetComponentInChildren<FireMeshRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        fireMesh.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -28,8 +36,13 @@ public class Weapon : MonoBehaviour
         if(Input.GetMouseButton(0) && bulletAmount > 0 && time<Time.time)
         {
             time = Time.time + interval;
+            fireMesh.TurnOn();
             bulletAmount = bulletUI.UpdateBulletAmount();
             RayCastFire();
+        }
+        else
+        {
+            fireMesh.TurnOff(time);
         }
     }
 

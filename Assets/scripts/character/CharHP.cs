@@ -7,6 +7,7 @@ public class CharHP : MonoBehaviour
 {
     private Image HPGreen;
     private Image HPRed;
+    public BgDamageUI_img bgUI;
 
     private float currentHP = 100;
     private float damageAmount = 0;
@@ -15,6 +16,7 @@ public class CharHP : MonoBehaviour
     {
         HPGreen = transform.GetChild(0).GetComponent<Image>();
         HPRed = transform.GetChild(1).GetComponent<Image>();
+        bgUI = FindObjectOfType<BgDamageUI_img>();
     }
 
     void OnEnable()
@@ -33,12 +35,13 @@ public class CharHP : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(0 < currentHP)
+        if (0 < currentHP)
         {
             currentHP -= damage;
             damageAmount += damage;
             HPGreen.fillAmount = currentHP / 100;
             HPRed.fillAmount = damageAmount / 100;
+            bgUI.ThresholdAlphaImage(currentHP <= 50);
         }
         else
         {
@@ -55,6 +58,7 @@ public class CharHP : MonoBehaviour
             damageAmount -= healAmount;
             HPGreen.fillAmount = currentHP / 100;
             HPRed.fillAmount = damageAmount / 100;
+            bgUI.ThresholdAlphaImage(currentHP <= 50);
             return true;
         }
         else return false;
